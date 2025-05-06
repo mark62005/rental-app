@@ -1,5 +1,6 @@
 import {
 	IDiscoverCardProps,
+	INavLink,
 	ISectionNavLink,
 } from "@/types/app/component-props";
 
@@ -56,5 +57,29 @@ export const DISCOVER_CONFIG: IDiscoverCardProps[] = [
 		title: "Enjoy your New Home",
 		description:
 			"Move into your new rental property and start enjoying your dream home.",
+	},
+] as const;
+
+/* FOOTER CONFIGS */
+export const FOOTER_NAV_CONFIG: INavLink[] = [
+	{
+		label: "About Us",
+		href: "/about",
+	},
+	{
+		label: "Contact Us",
+		href: "/contact",
+	},
+	{
+		label: "FAQ",
+		href: "/frequently-asked-questions",
+	},
+	{
+		label: "Terms",
+		href: "/terms",
+	},
+	{
+		label: "Privacy",
+		href: "/privacy",
 	},
 ] as const;
