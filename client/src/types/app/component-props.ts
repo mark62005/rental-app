@@ -15,3 +15,9 @@ export interface ISectionNavLink extends INavLink {
 export interface IFeatureCardProps {
 	featureLink: ISectionNavLink;
 }
+
+export interface IDiscoverCardProps {
+	imageSrc: string;
+	title: string;
+	description: string;
+}
