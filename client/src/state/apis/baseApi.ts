@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BaseQueryApi, FetchArgs } from "@reduxjs/toolkit/query";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { fetchAuthSession } from "aws-amplify/auth";
 
 const customBaseQuery = async (
 	args: string | FetchArgs,
@@ -9,6 +10,15 @@ const customBaseQuery = async (
 ): Promise<any> => {
 	const baseQuery = fetchBaseQuery({
 		baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+		prepareHeaders: async (headers) => {
+			const session = await fetchAuthSession();
+			const { idToken } = session.tokens ?? {};
+
+			if (idToken) {
+				headers.set("Authorization", `Bearer ${idToken}`);
+			}
+			return headers;
+		},
 	});
 
 	try {
