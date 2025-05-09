@@ -5,6 +5,8 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 /* ROUTES IMPORT */
+import tenantRoutes from "./routes/tenantRoutes";
+import { authMiddleware } from "./middlewares/authMiddleware";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -22,6 +24,7 @@ app.use(cors());
 app.get("/test", (req, res) => {
 	res.send("This is test route");
 });
+app.use("/tenants", authMiddleware(["tenant"]), tenantRoutes);
 
 /* SERVER */
 const port = Number(process.env.PORT) || 3002;
