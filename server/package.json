@@ -6,7 +6,7 @@
 	"scripts": {
 		"build": "rimraf dist && npx tsc",
 		"start": "node dist/index.js",
-		"dev": "concurrently \"npx tsc -w\" \"nodemon --exec ts-node src/index.ts\"",
+		"dev": "concurrently \"npx tsc -w\" \"nodemon --exec ts-node src/index.ts --clear-cache\"",
 		"seed": "ts-node src/seed/seedPostgres.ts",
 		"prisma:generate": "prisma generate",
 		"postprisma:generate": "shx cp -r src/generated/prisma/index.d.ts ../client/src/types/prismaTypes.d.ts"
