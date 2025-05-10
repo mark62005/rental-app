@@ -14,6 +14,7 @@ import {
 import "@aws-amplify/ui-react/styles.css";
 import { LayoutProps } from "@/types/app/page-props";
 import { Button } from "@/components/ui/button";
+import { isDashboardPage } from "@/lib/utils";
 
 // https://docs.amplify.aws/gen1/javascript/tools/libraries/configure-categories/
 Amplify.configure({
@@ -139,8 +140,6 @@ function AuthProvider({ children }: LayoutProps) {
 	const { user } = useAuthenticator((context) => [context.user]);
 
 	const isAuthPage = pathname.match(/^\/(sign\-in|sign\-up)$/);
-	const isDashboardPage =
-		pathname.startsWith("/managers") || pathname.startsWith("/tenants");
 
 	// Redirect authenticated users away from auth pages
 	useEffect(() => {
@@ -150,7 +149,7 @@ function AuthProvider({ children }: LayoutProps) {
 	}, [user, isAuthPage, router]);
 
 	// Allow access to public pages without authentication
-	if (!isAuthPage && !isDashboardPage) {
+	if (!isAuthPage && !isDashboardPage(pathname)) {
 		return <>{children}</>;
 	}
 

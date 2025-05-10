@@ -1,7 +1,8 @@
-import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
+import { AuthUser, fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 import { Manager as TManager, Tenant as TTenant } from "@/types/prismaTypes";
 import { IUser } from "@/types/redux/api/auth";
 import { baseApi } from "./baseApi";
+import { createNewUserInDatabase } from "@/lib/utils";
 
 export const authApi = baseApi.injectEndpoints({
 	endpoints: (buildler) => ({
@@ -12,16 +13,27 @@ export const authApi = baseApi.injectEndpoints({
 					const { idToken } = session.tokens ?? {};
 					const userRole = idToken?.payload["custom:role"] as string;
 
-					const user = await getCurrentUser();
+					const user: AuthUser = await getCurrentUser();
 
 					const endpoint =
 						userRole === "manager"
 							? `/managers/${user.userId}`
 							: `/tenants/${user.userId}`;
 
-					const userDetailsResponse = await fetchWithBaseQuery(endpoint);
+					let userDetailsResponse = await fetchWithBaseQuery(endpoint);
 
-					// TODO: If user doesn't exist, create new user in database
+					// If user doesn't exist, create new user in database
+					if (
+						userDetailsResponse.error &&
+						userDetailsResponse.error.status === 404
+					) {
+						userDetailsResponse = await createNewUserInDatabase(
+							user,
+							idToken,
+							userRole,
+							fetchWithBaseQuery
+						);
+					}
 
 					return {
 						data: {
@@ -38,3 +50,5 @@ export const authApi = baseApi.injectEndpoints({
 		}),
 	}),
 });
+
+export const { useGetAuthUserQuery } = authApi;

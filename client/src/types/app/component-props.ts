@@ -5,6 +5,10 @@ export interface INavLink {
 	className?: string;
 }
 
+export interface NotificationBadgeProps {
+	variant?: "notification" | "message";
+}
+
 /* LANDING SECTIONS */
 export interface ISectionNavLink extends INavLink {
 	imageSrc: string;
