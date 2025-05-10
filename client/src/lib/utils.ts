@@ -7,6 +7,10 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
+export function isDashboardPage(pathname: string): boolean {
+	return pathname.startsWith("/managers") || pathname.includes("/tenants");
+}
+
 /* RTK QUERY API */
 export async function createNewUserInDatabase(
 	user: AuthUser,
