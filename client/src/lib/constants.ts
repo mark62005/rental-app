@@ -3,10 +3,35 @@ import {
 	INavLink,
 	ISectionNavLink,
 } from "@/types/app/component-props";
+import { ISidebarNavLinksConfig } from "@/types/app/config";
+import { Building, FileText, Heart, Home, Settings } from "lucide-react";
 
 /* NAVBAR */
 export const NAVBAR_HEIGHT = 52; // in pixels
 export const MAIN_HEIGHT = `calc(100vh - ${NAVBAR_HEIGHT}px)`;
+
+/* SIDEBAR */
+export const SIDEBAR_NAVLINKS_CONFIG: ISidebarNavLinksConfig = {
+	managers: [
+		{ Icon: Building, label: "Properties", href: "/managers/properties" },
+		{
+			Icon: FileText,
+			label: "Applications",
+			href: "/managers/applications",
+		},
+		{ Icon: Settings, label: "Settings", href: "/managers/settings" },
+	],
+	tenants: [
+		{ Icon: Heart, label: "Favorites", href: "/tenants/favorites" },
+		{
+			Icon: FileText,
+			label: "Applications",
+			href: "/tenants/applications",
+		},
+		{ Icon: Home, label: "Residences", href: "/tenants/residences" },
+		{ Icon: Settings, label: "Settings", href: "/tenants/settings" },
+	],
+} as const;
 
 /*** LANDING PAGE CONFIGS ***/
 
