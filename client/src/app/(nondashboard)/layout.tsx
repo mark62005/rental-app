@@ -1,4 +1,4 @@
-"use client ";
+"use client";
 
 import Navbar from "@/components/shared/Navbar";
 import { NAVBAR_HEIGHT } from "@/lib/constants";
@@ -6,7 +6,7 @@ import { LayoutProps } from "@/types/app/page-props";
 
 function NonDashboardLayout({ children }: LayoutProps) {
 	return (
-		<div>
+		<div className="h-full w-full">
 			<Navbar />
 
 			<main
