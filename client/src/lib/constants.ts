@@ -7,7 +7,7 @@ import { ISidebarNavLinksConfig } from "@/types/app/config";
 import { Building, FileText, Heart, Home, Settings } from "lucide-react";
 
 /* NAVBAR */
-export const NAVBAR_HEIGHT = 52; // in pixels
+export const NAVBAR_HEIGHT = 56; // in pixels
 export const MAIN_HEIGHT = `calc(100vh - ${NAVBAR_HEIGHT}px)`;
 
 /* SIDEBAR */
