@@ -9,6 +9,17 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
+export function capitalize(word: string): string {
+	if (word.length === 0) {
+		return "";
+	}
+
+	if (word.length === 1) {
+		return word.toUpperCase();
+	}
+	return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
 export function isDashboardPage(pathname: string): boolean {
 	return pathname.startsWith("/managers") || pathname.includes("/tenants");
 }
