@@ -1,8 +1,9 @@
 import { AuthUser } from "aws-amplify/auth";
-import { Manager, Tenant } from "@/types/prismaTypes";
+import { ITenant } from "@/types/app/tenants";
+import { Manager } from "@/types/prismaTypes";
 
 export interface IUser {
 	cognitoInfo: AuthUser;
-	userInfo: Tenant | Manager;
+	userInfo: ITenant | Manager;
 	userRole: string;
 }
