@@ -25,3 +25,12 @@ export interface IDiscoverCardProps {
 	title: string;
 	description: string;
 }
+
+/*** DASHBOARD PAGES ***/
+export interface AppSidebarProps {
+	userRole: "manager" | "tenant";
+}
+
+export interface SidebarToggleButtonProps {
+	variant: "open" | "close";
+}

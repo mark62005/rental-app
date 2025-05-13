@@ -17,6 +17,8 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Plus, Search } from "lucide-react";
 
 function Navbar() {
 	const router = useRouter();
@@ -50,6 +52,12 @@ function Navbar() {
 		>
 			<div className="flex justify-between items-center w-full py-3 px-8 bg-gray-700 text-gray-50">
 				<div className="flex items-center gap-4 md:gap-6">
+					{isDashboardPage(pathname) && (
+						<div className="md:hidden">
+							<SidebarTrigger />
+						</div>
+					)}
+
 					<Link
 						href="/"
 						className="cursor-pointer hover:opacity-90"
@@ -69,6 +77,34 @@ function Navbar() {
 							</div>
 						</div>
 					</Link>
+
+					{isDashboardPage(pathname) && authUser && (
+						<Button
+							variant="secondary"
+							className="md:ml-4 bg-gray-50 text-gray-700 hover:bg-secondary-500 hover:text-gray-50"
+							onClick={() =>
+								router.push(
+									authUser.userRole?.toLowerCase() === "manager"
+										? "/managers/new-property"
+										: "/search"
+								)
+							}
+						>
+							{authUser.userRole?.toLowerCase() === "manager" ? (
+								<>
+									<Plus className="size-4" />
+									<span className="hidden md:block ml-2">Add New Property</span>
+								</>
+							) : (
+								<>
+									<Search className="size-4" />
+									<span className="hidden md:block ml-2">
+										Search Properties
+									</span>
+								</>
+							)}
+						</Button>
+					)}
 				</div>
 
 				{!isDashboardPage(pathname) && (
