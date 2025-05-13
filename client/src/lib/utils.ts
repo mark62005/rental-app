@@ -1,6 +1,8 @@
+import { IMutationMessage } from "@/types/app/utils";
 import { FetchArgs } from "@reduxjs/toolkit/query/react";
 import { AuthUser, JWT } from "aws-amplify/auth";
 import { clsx, type ClassValue } from "clsx";
+import { toast } from "sonner";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -9,6 +11,24 @@ export function cn(...inputs: ClassValue[]) {
 
 export function isDashboardPage(pathname: string): boolean {
 	return pathname.startsWith("/managers") || pathname.includes("/tenants");
+}
+
+/* TOAST */
+export async function withToast<T>(
+	mutationFn: Promise<T>,
+	messages: IMutationMessage
+): Promise<T> {
+	const { success, error } = messages;
+
+	try {
+		const result = await mutationFn;
+
+		if (success) toast.success(success);
+		return result;
+	} catch (err) {
+		if (error) toast.error(error);
+		throw err;
+	}
 }
 
 /* RTK QUERY API */
