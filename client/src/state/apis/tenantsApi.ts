@@ -9,7 +9,7 @@ export const tenantsApi = baseApi.injectEndpoints({
 			{ cognitoId: string } & Partial<ITenant>
 		>({
 			query: ({ cognitoId, ...updatedTenant }) => ({
-				url: `tenatns/${cognitoId}`,
+				url: `tenants/${cognitoId}`,
 				method: "PUT",
 				body: updatedTenant,
 			}),
