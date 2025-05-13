@@ -1,3 +1,5 @@
+import { TSettingsFormData } from "@/lib/schemas";
+
 /*** NAV ***/
 export interface INavLink {
 	href: string;
@@ -33,4 +35,12 @@ export interface AppSidebarProps {
 
 export interface SidebarToggleButtonProps {
 	variant: "open" | "close";
+}
+
+/*** SETTINGS PAGES ***/
+export interface SettingsFormProps {
+	initialData: TSettingsFormData;
+	onSubmit: (data: TSettingsFormData) => Promise<void>;
+	userRole: "manager" | "tenant";
+	isLoading: boolean;
 }
