@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Prisma, PrismaClient } from "../generated/prisma";
+import { wktToGeoJSON } from "@terraformer/wkt";
 
 const prisma = new PrismaClient();
 
@@ -140,5 +141,52 @@ export async function getFilteredProperties(
 	} catch (error) {
 		console.error("Error retrieving properties: ", error);
 		res.status(500).json({ message: "Error retrieving properties." });
+	}
+}
+
+export async function getPropertyWithId(
+	req: Request,
+	res: Response
+): Promise<void> {
+	console.log("/:id GET called");
+
+	try {
+		const { id } = req.params;
+
+		const property = await prisma.property.findUnique({
+			where: { id: Number(id) },
+			include: {
+				location: true,
+			},
+		});
+
+		if (!property) {
+			res.status(404).json({ message: "Property not found." });
+			return;
+		}
+
+		const coordinates: { coordinates: string }[] =
+			await prisma.$queryRaw`SELECT ST_asText(coordinates) as coordinates from "Location" where id = ${property.location.id}`;
+
+		const geoJSON: any = wktToGeoJSON(coordinates[0]?.coordinates || "");
+		const longitude = geoJSON.coordinates[0];
+		const latitude = geoJSON.coordinates[1];
+
+		const propertyWithCoordinates = {
+			...property,
+			loaction: {
+				...property.location,
+				coordinates: {
+					longitude,
+					latitude,
+				},
+			},
+		};
+
+		console.log(`Retrieved property id: ${id} successfully.`);
+		res.status(200).json({ data: propertyWithCoordinates });
+	} catch (error) {
+		console.error("Error retrieving property: ", error);
+		res.status(500).json({ message: "Error retrieving property." });
 	}
 }

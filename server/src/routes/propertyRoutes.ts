@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { getFilteredProperties } from "../controllers/propertyControllers";
+import {
+	getFilteredProperties,
+	getPropertyWithId,
+} from "../controllers/propertyControllers";
 
 const router = Router();
 
 router.get("/", getFilteredProperties);
+router.get("/:id", getPropertyWithId);
 
 export default router;
