@@ -4,7 +4,25 @@ import {
 	ISectionNavLink,
 } from "@/types/app/component-props";
 import { ISidebarNavLinksConfig } from "@/types/app/config";
-import { Building, FileText, Heart, Home, Settings } from "lucide-react";
+import {
+	Building,
+	Car,
+	Castle,
+	Dumbbell,
+	FileText,
+	Heart,
+	Home,
+	LucideIcon,
+	Maximize,
+	PawPrint,
+	Settings,
+	Thermometer,
+	Trees,
+	Tv,
+	Warehouse,
+	Waves,
+	Wifi,
+} from "lucide-react";
 
 /* NAVBAR */
 export const NAVBAR_HEIGHT = 56; // in pixels
@@ -108,3 +126,54 @@ export const FOOTER_NAV_CONFIG: INavLink[] = [
 		href: "/privacy",
 	},
 ] as const;
+
+/* ENUMS */
+export enum PropertyTypeEnum {
+	Rooms = "Rooms",
+	Tinyhouse = "Tinyhouse",
+	Apartment = "Apartment",
+	Villa = "Villa",
+	Townhouse = "Townhouse",
+	Cottage = "Cottage",
+}
+
+export const PropertyTypeIcons: Record<PropertyTypeEnum, LucideIcon> = {
+	Rooms: Home,
+	Tinyhouse: Warehouse,
+	Apartment: Building,
+	Villa: Castle,
+	Townhouse: Home,
+	Cottage: Trees,
+};
+
+export enum AmenityEnum {
+	WasherDryer = "WasherDryer",
+	AirConditioning = "AirConditioning",
+	Dishwasher = "Dishwasher",
+	HighSpeedInternet = "HighSpeedInternet",
+	HardwoodFloors = "HardwoodFloors",
+	WalkInClosets = "WalkInClosets",
+	Microwave = "Microwave",
+	Refrigerator = "Refrigerator",
+	Pool = "Pool",
+	Gym = "Gym",
+	Parking = "Parking",
+	PetsAllowed = "PetsAllowed",
+	WiFi = "WiFi",
+}
+
+export const AmenityIcons: Record<AmenityEnum, LucideIcon> = {
+	WasherDryer: Waves,
+	AirConditioning: Thermometer,
+	Dishwasher: Waves,
+	HighSpeedInternet: Wifi,
+	HardwoodFloors: Home,
+	WalkInClosets: Maximize,
+	Microwave: Tv,
+	Refrigerator: Thermometer,
+	Pool: Waves,
+	Gym: Dumbbell,
+	Parking: Car,
+	PetsAllowed: PawPrint,
+	WiFi: Wifi,
+};
