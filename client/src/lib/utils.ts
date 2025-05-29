@@ -1,3 +1,4 @@
+import { IProperty } from "@/types/app/properties";
 import { IMutationMessage } from "@/types/app/utils";
 import { FetchArgs } from "@reduxjs/toolkit/query/react";
 import { AuthUser, JWT } from "aws-amplify/auth";
@@ -96,4 +97,13 @@ export function formatPriceValue(value: number | null, isMin: boolean) {
 
 export function formatEnumString(str: string) {
 	return str.replace(/([A-Z])/g, " $1").trim();
+}
+
+export function verifyIsFavorite(
+	propertyId: number,
+	favorites?: IProperty[]
+): boolean {
+	if (!favorites || favorites.length === 0) return false;
+
+	return favorites.some((fav: IProperty) => fav.id === propertyId);
 }

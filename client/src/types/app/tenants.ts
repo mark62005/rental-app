@@ -1,4 +1,5 @@
 import { Tenant } from "@/types/prismaTypes";
+import { IProperty } from "./properties";
 
 export interface ITenant extends Tenant {
 	id: number;
@@ -6,4 +7,5 @@ export interface ITenant extends Tenant {
 	name: string;
 	email: string;
 	phoneNumber?: string;
+	favorites: IProperty[];
 }

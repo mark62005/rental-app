@@ -109,7 +109,7 @@ export async function getFilteredProperties(
 
 			whereConditions.push(
 				Prisma.sql`ST_DWithin(
-          l.coordinates::geometry,
+          loc.coordinates::geometry,
           ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326),
           ${degrees}
         )`
@@ -180,7 +180,7 @@ export async function getPropertyWithId(
 
 		const propertyWithCoordinates = {
 			...property,
-			loaction: {
+			location: {
 				...property.location,
 				coordinates: {
 					longitude,

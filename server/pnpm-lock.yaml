@@ -60,6 +60,9 @@ importers:
       '@types/express':
         specifier: ^4.17.21
         version: 4.17.21
+      '@types/helmet':
+        specifier: ^4.0.0
+        version: 4.0.0
       '@types/jsonwebtoken':
         specifier: ^9.0.9
         version: 9.0.9
@@ -78,9 +81,15 @@ importers:
       '@types/uuid':
         specifier: ^10.0.0
         version: 10.0.0
+      client-s3:
+        specifier: link:@types/@aws-sdk/client-s3
+        version: link:@types/@aws-sdk/client-s3
       concurrently:
         specifier: ^9.1.2
         version: 9.1.2
+      lib-storage:
+        specifier: link:@types/@aws-sdk/lib-storage
+        version: link:@types/@aws-sdk/lib-storage
       nodemon:
         specifier: ^3.1.10
         version: 3.1.10
@@ -560,6 +569,10 @@ packages:
 
   '@types/geojson@7946.0.16':
     resolution: {integrity: sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==}
+
+  '@types/helmet@4.0.0':
+    resolution: {integrity: sha512-ONIn/nSNQA57yRge3oaMQESef/6QhoeX7llWeDli0UZIfz8TQMkfNPTXA8VnnyeA1WUjG2pGqdjEIueYonMdfQ==}
+    deprecated: This is a stub types definition. helmet provides its own type definitions, so you do not need this installed.
 
   '@types/http-errors@2.0.4':
     resolution: {integrity: sha512-D0CFMMtydbJAegzOyHjtiKPLlvnm3iTZyZRSZoLq2mRhDdmLfIWOCYPfQJ4cu2erKghU++QvjcUjp/5h7hESpA==}
@@ -2511,6 +2524,10 @@ snapshots:
       '@types/serve-static': 1.15.7
 
   '@types/geojson@7946.0.16': {}
+
+  '@types/helmet@4.0.0':
+    dependencies:
+      helmet: 8.1.0
 
   '@types/http-errors@2.0.4': {}
 

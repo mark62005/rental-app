@@ -66,7 +66,7 @@ const customBaseQuery = async (
 export const baseApi = createApi({
 	baseQuery: customBaseQuery,
 	reducerPath: "baseApi",
-	tagTypes: ["Tenants", "Managers"],
+	tagTypes: ["Tenants", "Managers", "Properties", "PropertyDetails"],
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	endpoints: (_builder) => ({}),
 });
