@@ -1,4 +1,5 @@
 import { TSettingsFormData } from "@/lib/schemas";
+import { IProperty } from "./properties";
 
 /*** NAV ***/
 export interface INavLink {
@@ -43,4 +44,21 @@ export interface SettingsFormProps {
 	onSubmit: (data: TSettingsFormData) => Promise<void>;
 	userRole: "manager" | "tenant";
 	isLoading: boolean;
+}
+
+/*** SEARCH PAGE ***/
+export interface CardProps {
+	property: IProperty;
+	isFavorite: boolean;
+	onFavoriteToggle: () => void;
+	showFavoriteButton?: boolean;
+	propertyLink?: string;
+}
+
+export interface CardCompactProps {
+	property: IProperty;
+	isFavorite: boolean;
+	onFavoriteToggle: () => void;
+	showFavoriteButton?: boolean;
+	propertyLink?: string;
 }
